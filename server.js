@@ -28,6 +28,13 @@ app.use(passport.initialize())
 
 require('./configs/passport')(passport)
 
+
+/*Adds the react production build to serve react requests*/
+app.use(express.static(path.join(__dirname, '../client/build')));
+
+/*React root*/
+app.get('*', (req, res) => { res.sendFile(path.join(__dirname + '../client/build/index.html')); });
+
 app.use('/users',users)
 
 
